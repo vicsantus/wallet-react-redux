@@ -1,5 +1,3 @@
-/* eslint-disable no-magic-numbers */
-/* eslint-disable max-len */
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -31,7 +29,8 @@ class Login extends React.Component {
 
   render() {
     const { pswd, email } = this.state;
-    const rgxEmail = /^([a-z0-9]+(?:[._-][a-z0-9]+)*)@([a-z0-9]+(?:[.-][a-z0-9]+)*\.[a-z]{2,})$/;
+    const magic = 6;
+    const R = /^([a-z0-9]+(?:[._-][a-z0-9]+)*)@([a-z0-9]+(?:[.-][a-z0-9]+)*\.[a-z]{2,})$/;
     return (
       <form onSubmit={ this.handleSubmit }>
         <input
@@ -47,7 +46,7 @@ class Login extends React.Component {
           data-testid="password-input"
         />
         <button
-          disabled={ pswd.length < 6 || !rgxEmail.test(email) }
+          disabled={ pswd.length < magic || !R.test(email) }
           type="submit"
         >
           Entrar
