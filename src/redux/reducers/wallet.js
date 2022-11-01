@@ -1,4 +1,4 @@
-import { FETCH_ERROR, FETCH_RESOLVED, GET_FETCH } from '../actions';
+import { ADD_EXPENSES, FETCH_ERROR, FETCH_RESOLVED, GET_FETCH } from '../actions';
 
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 const INITIAL_STATE = {
@@ -22,7 +22,20 @@ const wallet = (state = INITIAL_STATE, action) => {
   case FETCH_ERROR:
     return ({
       ...state,
-      currencies: [...action.err],
+      currencies: [...state.currencies, action.err],
+    });
+  case ADD_EXPENSES:
+    return ({
+      ...state,
+      expenses: [
+        ...state.expenses,
+        {
+          ...action.data,
+          exchangeRates: action.fetched,
+          id: state.idToEdit,
+        },
+      ],
+      idToEdit: state.idToEdit + 1,
     });
   default:
     return state;

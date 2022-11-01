@@ -9,11 +9,23 @@ class Header extends Component {
   }
 
   render() {
-    const { email, idToEdit } = this.props;
+    const { email, expenses } = this.props;
     return (
       <header>
         <p data-testid="email-field">{email}</p>
-        <p data-testid="total-field">{idToEdit}</p>
+        <p data-testid="total-field">
+          {expenses.length === 0 && 0}
+          {expenses.length > 0 && expenses.reduce((atual, pos) => {
+            const { currency } = pos;
+            const { [currency]: utilPos } = pos.exchangeRates;
+            const { value: valuePos } = pos;
+            const newValue = JSON.parse(valuePos) * utilPos.ask;
+            const sum = newValue + (typeof atual === 'object'
+              ? 0 : JSON.parse(atual));
+            return sum;
+          }, []).toFixed(2)}
+
+        </p>
         <p data-testid="header-currency-field">BRL</p>
       </header>
     );
@@ -22,15 +34,18 @@ class Header extends Component {
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
+  expenses: PropTypes.shape({
+    length: PropTypes.number,
+    reduce: PropTypes.func,
+  }).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
-  idToEdit: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
-  idToEdit: state.wallet.idToEdit,
+  expenses: state.wallet.expenses,
 });
 
 export default connect(mapStateToProps)(Header);

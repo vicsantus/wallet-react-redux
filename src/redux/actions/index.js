@@ -3,6 +3,7 @@ export const GET_EMAIL = 'GET_EMAIL';
 export const GET_FETCH = 'GET_FETCH';
 export const FETCH_RESOLVED = 'FETCH_RESOLVED';
 export const FETCH_ERROR = 'FETCH_ERROR';
+export const ADD_EXPENSES = 'ADD_EXPENSES';
 
 export const actUser = (email) => ({
   type: GET_EMAIL,
@@ -33,3 +34,9 @@ export const makeFetch = () => async (dispatch) => {
     return dispatch(fetchError(error));
   }
 };
+
+export const addExpenses = (data, fetched) => ({
+  type: ADD_EXPENSES,
+  data,
+  fetched,
+});
