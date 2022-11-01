@@ -77,7 +77,7 @@ class Table extends Component {
                     <img
                       style={ { pointerEvents: 'none' } }
                       src={ EditPath }
-                      alt="Garb Icon"
+                      alt="Edit Icon"
                     />
                   </button>
                   <button

@@ -136,7 +136,12 @@ class WalletForm extends Component {
             id="description-input"
           />
         </label>
-        <button type="submit">{editor ? 'Editar despesa' : 'Adicionar despesa'}</button>
+        <button
+          data-testid="button-submit-walletform"
+          type="submit"
+        >
+          {editor ? 'Editar despesa' : 'Adicionar despesa'}
+        </button>
       </form>
     );
   }

@@ -1,6 +1,6 @@
 import {
   ADD_EXPENSES,
-  DELETE_EXPENSE, EDIT_EXPENSE, FETCH_ERROR, FETCH_RESOLVED, GET_FETCH, MAKE_EDITION_EXPS,
+  DELETE_EXPENSE, EDIT_EXPENSE, FETCH_RESOLVED, GET_FETCH, MAKE_EDITION_EXPS,
 } from '../actions';
 
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
@@ -23,20 +23,12 @@ const wallet = (state = INITIAL_STATE, action) => {
       ...state,
       currencies: Object.keys(action.data).map((x) => x).filter((x) => x !== 'USDT'),
     });
-  case FETCH_ERROR:
-    return ({
-      ...state,
-      currencies: [...state.currencies, action.err],
-    });
   case ADD_EXPENSES:
     return ({
       ...state,
       expenses: [
         ...state.expenses,
-        {
-          ...action.data,
-          exchangeRates: action.fetched,
-        },
+        { ...action.data, exchangeRates: action.fetched },
       ],
     });
   case EDIT_EXPENSE:

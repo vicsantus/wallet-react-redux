@@ -22,11 +22,6 @@ export const fetchReceive = (data) => ({
   data,
 });
 
-export const fetchError = (err) => ({
-  type: FETCH_ERROR,
-  err,
-});
-
 export const makeFetch = () => async (dispatch) => {
   dispatch(getFetch());
   try {
@@ -34,7 +29,7 @@ export const makeFetch = () => async (dispatch) => {
     const response = await r.json();
     return dispatch(fetchReceive(response));
   } catch (error) {
-    return dispatch(fetchError(error));
+    return console.log(error);
   }
 };
 
