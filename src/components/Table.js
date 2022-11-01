@@ -6,6 +6,13 @@ import EditPath from './Imgs/Edit-Icon.svg';
 import GarbPath from './Imgs/Garb-Icon.svg';
 
 class Table extends Component {
+  constructor() {
+    super();
+    this.state = {
+      edt: '',
+    };
+  }
+
   handleDelete = ({ target }) => {
     const { value } = target;
     const { dispatch } = this.props;
@@ -18,8 +25,19 @@ class Table extends Component {
     dispatch(editExpense(JSON.parse(id)));
   };
 
+  handleUpdate = () => {
+    const { editor } = this.props;
+    this.setState({
+      edt: editor,
+    });
+  };
+
   render() {
-    const { expenses } = this.props;
+    const { expenses, editor } = this.props;
+    const { edt } = this.state;
+    if (edt !== editor) {
+      this.handleUpdate();
+    }
     return (
       <table>
         <thead>
@@ -86,6 +104,7 @@ class Table extends Component {
 
 Table.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  editor: PropTypes.bool.isRequired,
   expenses: PropTypes.shape({
     map: PropTypes.func.isRequired,
   }).isRequired,
@@ -93,6 +112,7 @@ Table.propTypes = {
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
+  editor: state.wallet.editor,
 });
 
 export default connect(mapStateToProps)(Table);

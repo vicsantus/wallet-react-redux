@@ -3,13 +3,31 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Header extends Component {
+  constructor() {
+    super();
+    this.state = {
+      update: '',
+    };
+  }
+
   componentDidMount() {
     const { history, email } = this.props;
     if (!email) history.push('/');
   }
 
+  handleUpdate = () => {
+    const { editor } = this.props;
+    this.setState({
+      update: editor,
+    });
+  };
+
   render() {
-    const { email, expenses } = this.props;
+    const { update } = this.state;
+    const { email, expenses, editor } = this.props;
+    if (update !== editor) {
+      this.handleUpdate();
+    }
     return (
       <header>
         <p data-testid="email-field">{email}</p>
@@ -32,6 +50,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
+  editor: PropTypes.bool.isRequired,
   email: PropTypes.string.isRequired,
   expenses: PropTypes.shape({
     length: PropTypes.number,
@@ -45,6 +64,7 @@ Header.propTypes = {
 const mapStateToProps = (state) => ({
   email: state.user.email,
   expenses: state.wallet.expenses,
+  editor: state.wallet.editor,
 });
 
 export default connect(mapStateToProps)(Header);
