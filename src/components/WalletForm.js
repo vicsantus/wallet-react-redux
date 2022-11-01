@@ -12,6 +12,7 @@ class WalletForm extends Component {
       method: 'Dinheiro',
       tag: 'Alimentação',
       description: '',
+      id: 0,
     };
   }
 
@@ -20,14 +21,35 @@ class WalletForm extends Component {
     dispatch(makeFetch());
   }
 
+  refreshStatesToEdit = () => {
+    const { idToEdit, expenses } = this.props;
+    this.setState({
+      value: expenses[idToEdit].value,
+      currency: expenses[idToEdit].currency,
+      method: expenses[idToEdit].method,
+      tag: expenses[idToEdit].tag,
+      description: expenses[idToEdit].description,
+      id: idToEdit,
+    });
+  };
+
   handleSubmit = async (e) => {
     e.preventDefault();
     const fetched = await fetch('https://economia.awesomeapi.com.br/json/all')
       .then((x) => x.json())
       .then((resp) => resp)
       .catch((err) => err);
-    const { dispatch } = this.props;
-    dispatch(addExpenses(this.state, fetched));
+    const { dispatch, editor, expenses } = this.props;
+    if (editor) {
+      dispatch(makeEditionExpense(this.state, fetched));
+      const totalExpenses = expenses.length;
+      // dispatch(addExpenses(this.state, fetched));
+    } else {
+      this.setState((atual) => ({
+        id: atual.id + 1,
+      }));
+      dispatch(addExpenses(this.state, fetched));
+    }
     this.setState({
       value: '',
       description: '',
@@ -42,8 +64,11 @@ class WalletForm extends Component {
   };
 
   render() {
-    const { currencies } = this.props;
-    const { value, currency, description, method, tag } = this.state;
+    const { currencies, editor, idToEdit } = this.props;
+    const { value, currency, description, method, tag, id } = this.state;
+    if (editor && id !== idToEdit) {
+      this.refreshStatesToEdit();
+    }
     return (
       <form onSubmit={ this.handleSubmit } onChange={ this.handleChange }>
         <label htmlFor="value-input">
@@ -108,7 +133,7 @@ class WalletForm extends Component {
             id="description-input"
           />
         </label>
-        <button type="submit">Adicionar despesa</button>
+        <button type="submit">{editor ? 'Editar despesa' : 'Adicionar despesa'}</button>
       </form>
     );
   }
@@ -119,10 +144,16 @@ WalletForm.propTypes = {
     map: PropTypes.func,
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
+  editor: PropTypes.bool.isRequired,
+  expenses: PropTypes.shape.isRequired,
+  idToEdit: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  editor: state.wallet.editor,
+  idToEdit: state.wallet.idToEdit,
+  expenses: state.wallet.expenses,
 });
 
 export default connect(mapStateToProps)(WalletForm);

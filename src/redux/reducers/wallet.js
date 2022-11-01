@@ -1,4 +1,7 @@
-import { ADD_EXPENSES, FETCH_ERROR, FETCH_RESOLVED, GET_FETCH } from '../actions';
+import {
+  ADD_EXPENSES,
+  DELETE_EXPENSE, EDIT_EXPENSE, FETCH_ERROR, FETCH_RESOLVED, GET_FETCH, MAKE_EDITION_EXPS,
+} from '../actions';
 
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 const INITIAL_STATE = {
@@ -9,6 +12,7 @@ const INITIAL_STATE = {
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
+  const oldExpenses = state.expenses;
   switch (action.type) {
   case GET_FETCH:
     return ({
@@ -32,10 +36,28 @@ const wallet = (state = INITIAL_STATE, action) => {
         {
           ...action.data,
           exchangeRates: action.fetched,
-          id: state.idToEdit,
         },
       ],
-      idToEdit: state.idToEdit + 1,
+    });
+  case EDIT_EXPENSE:
+    return ({
+      ...state,
+      idToEdit: action.id,
+      editor: true,
+    });
+  case DELETE_EXPENSE:
+    return ({
+      ...state,
+      expenses: [...state.expenses.filter((ele) => ele.id !== action.id)],
+    });
+  case MAKE_EDITION_EXPS:
+    oldExpenses.splice(action.data.id, 1, { ...action.data, exchangeRates: action.fetched,
+    });
+    return ({
+      ...state,
+      expenses: oldExpenses,
+      editor: false,
+      idToEdit: 0,
     });
   default:
     return state;

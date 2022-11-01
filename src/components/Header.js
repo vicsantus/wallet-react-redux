@@ -14,7 +14,7 @@ class Header extends Component {
       <header>
         <p data-testid="email-field">{email}</p>
         <p data-testid="total-field">
-          {expenses.length === 0 && 0}
+          {expenses.length === 0 && '0.00'}
           {expenses.length > 0 && expenses.reduce((atual, pos) => {
             const { currency } = pos;
             const { [currency]: utilPos } = pos.exchangeRates;
@@ -24,7 +24,6 @@ class Header extends Component {
               ? 0 : JSON.parse(atual));
             return sum;
           }, []).toFixed(2)}
-
         </p>
         <p data-testid="header-currency-field">BRL</p>
       </header>
