@@ -43,6 +43,9 @@ class WalletForm extends Component {
     if (editor) {
       dispatch(makeEditionExpense(this.state, fetched));
       const totalExpenses = expenses.length;
+      this.setState({
+        id: totalExpenses,
+      });
       // dispatch(addExpenses(this.state, fetched));
     } else {
       this.setState((atual) => ({
