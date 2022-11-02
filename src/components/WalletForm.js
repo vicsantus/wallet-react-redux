@@ -73,7 +73,11 @@ class WalletForm extends Component {
       this.refreshStatesToEdit();
     }
     return (
-      <form onSubmit={ this.handleSubmit } onChange={ this.handleChange }>
+      <form
+        className="form_walletform"
+        onSubmit={ this.handleSubmit }
+        onChange={ this.handleChange }
+      >
         <label htmlFor="value-input">
           {'Valor: '}
           <input
@@ -81,6 +85,7 @@ class WalletForm extends Component {
             value={ value }
             data-testid="value-input"
             id="value-input"
+            className="value-input"
           />
         </label>
         <label htmlFor="currency-input">
@@ -134,6 +139,7 @@ class WalletForm extends Component {
             value={ description }
             data-testid="description-input"
             id="description-input"
+            className="description-input"
           />
         </label>
         <button

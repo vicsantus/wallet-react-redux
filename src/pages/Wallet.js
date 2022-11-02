@@ -9,7 +9,7 @@ class Wallet extends React.Component {
     const { history } = this.props;
     return (
       <>
-        <section>
+        <section className="section_header_wallet">
           <Header history={ history } />
           <WalletForm history={ history } />
         </section>

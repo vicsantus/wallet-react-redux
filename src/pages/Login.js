@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import LogoTrybeWallet from '../imgs/logo_Trybe_Wallet.png';
 import { actUser } from '../redux/actions';
 
 class Login extends React.Component {
@@ -32,7 +33,12 @@ class Login extends React.Component {
     const magic = 6;
     const R = /^([a-z0-9]+(?:[._-][a-z0-9]+)*)@([a-z0-9]+(?:[.-][a-z0-9]+)*\.[a-z]{2,})$/;
     return (
-      <form onSubmit={ this.handleSubmit }>
+      <form className="form-login" onSubmit={ this.handleSubmit }>
+        <img
+          className="logo_trybewallet"
+          src={ LogoTrybeWallet }
+          alt="logo_Trybe_Wallet"
+        />
         <input
           type="email"
           name="email"

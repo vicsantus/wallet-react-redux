@@ -2,40 +2,235 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
+.Switch_App {
   align-items: center;
-  background-color: #282c34;
-  color: white;
+  background: url('./imgs/foto_fundo.svg') 100%;
+  background-color: #2fc18c;
   display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
+  flex-flow: column nowrap;
+  height: 930px;
   justify-content: center;
-  min-height: 100vh;
+  mix-blend-mode: luminosity;
 }
 
-.App-link {
-  color: #61dafb;
+.form-login {
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  box-shadow: -4px 9px 13px rgba(3, 107, 82, 0.3);
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  width: 525px;
 }
 
-@keyframes App-logo-spin {
+.form-login img {
+  margin-bottom: 20px;
+  margin-top: 59px;
+}
 
-  from {
-    transform: rotate(0deg);
-  }
+.logo_trybewallet {
+  height: 56.14px;
+  opacity: 1;
+  width: 268.6px;
+}
 
-  to {
-    transform: rotate(360deg);
-  }
+.form-login input {
+  background: white;
+  border: 1px solid #003be5;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: #003be5;
+  height: 40px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  width: 330px;
+}
+
+table button {
+  background: none;
+  border: none;
+}
+
+.form-login button {
+  background: #003be5;
+  border: 1px solid #003be5;
+  border-radius: 5px;
+  color: white;
+  font-weight: 600;
+  height: 40px;
+  left: 475px;
+  margin-bottom: 50px;
+  margin-top: 5px;
+  top: 460px;
+  width: 330px;
+}
+
+.section_header_wallet {
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  box-shadow: -4px 9px 13px rgba(5, 18, 54, 0.4);
+  display: flex;
+  flex-flow: column nowrap;
+  height: 482px;
+  justify-content: space-evenly;
+  width: 1037px;
+  z-index: 2;
+}
+
+.header_wallet {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  padding: 30px;
+  width: 1037px;
+}
+
+.header_wallet p {
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.class_total_despesas {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.class_total_despesas p {
+  color: #003be5;
+}
+
+
+.header_wallet p:last-of-type {
+  color: #2fc18c;
+  font-weight: 600;
+}
+
+.class_total_despesas p:last-of-type {
+  color: #003be5;
+  font-weight: 400;
+  margin-left: 3px;
+}
+
+.class_total_despesas p:first-of-type {
+  font-weight: 700;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.form_walletform {
+  align-items: center;
+  background: rgba(225, 229, 235, 0.49);
+  border-radius: 0;
+  display: flex;
+  flex-flow: row wrap;
+  height: 134px;
+  justify-content: space-around;
+  padding: 10px 100px;
+}
+
+.form_walletform label , .form_walletform button {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.form_walletform label {
+  align-items: center;
+  color: #003be5;
+  display: flex;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 14px;
+  padding: 3px;
+}
+
+.form_walletform input {
+  background: rgba(225, 229, 235, 0.49);
+  border: 1px solid #003be5;
+  border-radius: 5px;
+  color: #003be5;
+  height: 30px;
+}
+
+.value-input {
+  width: 158px;
+}
+
+.description-input {
+  width: 288.86px;
+}
+
+.form_walletform select {
+  border: 1px solid #003be5;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: #003be5;
+}
+
+.form_walletform select:last-of-type {
+  height: 30px;
+  width: 155px;
+}
+
+.form_walletform button {
+  background: #2fc18c;
+  border: 1px solid #2fc18c;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  height: 40px;
+  line-height: 14px;
+  text-align: center;
+  width: 160px;
+}
+
+table {
+  background: #003be5;
+
+  /* border-collapse: collapse; */
+  border-radius: 10px;
+  box-shadow: -4px 9px 13px rgba(3, 107, 82, 0.3);
+  color: white;
+  height: 464px;
+  margin-top: -300px;
+  padding-top: 300px;
+  width: 1155px;
+  z-index: 1;
+}
+
+table tr {
+  border: solid;
+  border-width: 1px 0;
+}
+
+table th , table td {
+  height: 26.6px;
+  text-align: center;
+  width: 110.93px;
+
+  /* max-width: ; */
+}
+
+table th {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 13px;
+}
+
+table td {
+  color: #2fc18c;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 13px;
+}
+
+table thead th {
+  border-bottom: 3px solid white;
 }
